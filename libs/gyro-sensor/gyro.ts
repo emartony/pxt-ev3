@@ -104,7 +104,7 @@ namespace sensors {
             if (Math.abs(this.drift()) < 0.1) {
                 // no drift, skipping calibration
                 brick.setStatusLight(StatusLight.Green); // success
-                pause(1000);
+                pause(100);
                 brick.setStatusLight(statusLight); // resture previous light
 
                 // and we're done
@@ -119,7 +119,7 @@ namespace sensors {
             // send a reset command
             super.reset();
             // wait till sensor is live
-            pauseUntil(() => this.isActive(), 7000);
+            pauseUntil(() => this.isActive(), 4000);
             // mode toggling
             this._setMode(GyroSensorMode.Rate);
             this._setMode(GyroSensorMode.Angle);
@@ -128,7 +128,7 @@ namespace sensors {
             // check sensor is ready
             if (!this.isActive()) {
                 brick.setStatusLight(StatusLight.RedFlash); // didn't work
-                pause(2000);
+                pause(1000);
                 brick.setStatusLight(statusLight); // restore previous light
                 this._angle.reset();
                 this._calibrating = false;
@@ -140,7 +140,7 @@ namespace sensors {
 
             // and done
             brick.setStatusLight(StatusLight.Green); // success
-            pause(1000);
+            pause(100);
             brick.setStatusLight(statusLight); // resture previous light
 
             // and we're done
@@ -170,12 +170,12 @@ namespace sensors {
             super.reset();
             this._drift = 0;
             this._angle.reset();
-            pauseUntil(() => this.isActive(), 7000);
+            pauseUntil(() => this.isActive(), 4000);
 
             // check sensor is ready
             if (!this.isActive()) {
                 brick.setStatusLight(StatusLight.RedFlash); // didn't work
-                pause(2000);
+                pause(1000);
                 brick.setStatusLight(statusLight); // restore previous light
                 this._angle.reset();
                 this._calibrating = false;
